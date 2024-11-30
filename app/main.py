@@ -4,6 +4,11 @@ from pydantic import BaseModel
 from transformers import GPT2LMHeadModel, GPT2Tokenizer
 from fastapi.responses import HTMLResponse
 
+import uvicorn
+
+port = int(os.environ.get("PORT", 8080))  # Menggunakan PORT dari variabel lingkungan
+uvicorn.run("app.main:app", host="0.0.0.0", port=port)
+
 # Inisialisasi model GPT-2
 tokenizer = GPT2Tokenizer.from_pretrained("gpt2")
 model = GPT2LMHeadModel.from_pretrained("gpt2")
