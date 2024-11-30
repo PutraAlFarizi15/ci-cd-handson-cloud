@@ -3,6 +3,7 @@ import os
 from pydantic import BaseModel
 from transformers import GPT2LMHeadModel, GPT2Tokenizer
 from fastapi.responses import HTMLResponse
+import uvicorn
 
 # Ambil port dari environment variable atau default ke 8080
 port = int(os.environ.get("PORT", 8080))
@@ -43,5 +44,4 @@ async def generate_text(request: TextGenerationRequest):
     return {"generated_text": generated_text}
 
 if __name__ == "__main__":
-    import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=port)
+    uvicorn.run("app.main:app", host="0.0.0.0", port=8080)
