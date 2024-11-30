@@ -1,0 +1,11 @@
+steps:
+  # build
+  - name: 'gcr.io/cloud-builders/docker' #image prebuild oleh google
+    args: ['build', '-t', 'gcr.io/southern-field-441210-n4/fastapi-app:latest', '.']
+
+    # push
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'gcr.io/southern-field-441210-n4/fastapi-app:latest']
+
+images:
+  - 'gcr.io/southern-field-441210-n4/fastapi-app:latest'
