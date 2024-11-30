@@ -19,9 +19,3 @@ spec:
         image: putraalfarizi/k8s-fast-api:0.0.2
         ports:
         - containerPort: 80
-        resources:
-          requests:
-            cpu: 500m
-            memory: 2Gi
-          limits:
-            memory: 4Gi
