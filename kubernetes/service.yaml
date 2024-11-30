@@ -1,0 +1,11 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: fast-api
+spec:
+  selector:
+    app: fast-api
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 80 #incoming traffic in 80 is going to go port 80
