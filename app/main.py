@@ -3,10 +3,6 @@ import os
 from pydantic import BaseModel
 from transformers import GPT2LMHeadModel, GPT2Tokenizer
 from fastapi.responses import HTMLResponse
-import uvicorn
-
-# Ambil port dari environment variable atau default ke 8080
-port = int(os.environ.get("PORT", 8080))
 
 # Inisialisasi model GPT-2
 tokenizer = GPT2Tokenizer.from_pretrained("gpt2")
@@ -22,7 +18,7 @@ class TextGenerationRequest(BaseModel):
 def get_html():
     # Menyajikan file HTML untuk frontend
     try:
-        html_file_path = os.path.join(os.path.dirname(__file__), "app/index.html")
+        html_file_path = os.path.join(os.path.dirname(__file__), "index.html")
         with open(html_file_path, "r") as file:
             return HTMLResponse(content=file.read(), status_code=200)
     except Exception as e:
@@ -42,6 +38,3 @@ async def generate_text(request: TextGenerationRequest):
     generated_text = tokenizer.decode(outputs[0], skip_special_tokens=True)
 
     return {"generated_text": generated_text}
-
-if __name__ == "__main__":
-    uvicorn.run("app.main:app", host="0.0.0.0", port=8080)
