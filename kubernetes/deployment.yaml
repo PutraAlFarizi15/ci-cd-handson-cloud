@@ -16,12 +16,12 @@ spec:
     spec:
       containers:
       - name: fast-api
-        image: putraalfarizi/k8s-fast-api:0.0.1
+        image: putraalfarizi/k8s-fast-api:0.0.2
         ports:
         - containerPort: 80
         resources:
           requests:
-            cpu: 200m
-            memory: 300Mi
+            cpu: 500m
+            memory: 2Gi
           limits:
-            memory: 400Mi
+            memory: 4Gi
