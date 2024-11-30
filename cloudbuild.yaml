@@ -1,3 +1,5 @@
+options:
+  logging: CLOUD_LOGGING_ONLY
 steps:
   # build
   - name: 'gcr.io/cloud-builders/docker' #image prebuild oleh google
