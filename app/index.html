@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GPT-2 Text Generation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 50px;
+        }
+        #result {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            background-color: #f9f9f9;
+            min-height: 100px;
+        }
+    </style>
+</head>
+<body>
+    <h1>GPT-2 Text Generation</h1>
+    <form id="prompt-form">
+        <label for="prompt">Enter your prompt:</label><br><br>
+        <textarea id="prompt" rows="4" cols="50" placeholder="Type your prompt here..."></textarea><br><br>
+        <button type="submit">Generate Text</button>
+    </form>
+
+    <div id="result"></div>
+
+    <script>
+        document.getElementById('prompt-form').addEventListener('submit', async function(event) {
+            event.preventDefault();
+
+            const prompt = document.getElementById('prompt').value;
+            
+            if (!prompt) {
+                alert('Please enter a prompt!');
+                return;
+            }
+
+            // Mengirim permintaan POST ke backend FastAPI
+            const response = await fetch('/generate/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ prompt: prompt }),
+            });
+
+            // Menangani respons dari backend
+            const data = await response.json();
+            const generatedText = data.generated_text;
+
+            // Menampilkan hasilnya
+            document.getElementById('result').innerHTML = `<strong>Generated Text:</strong><br>${generatedText}`;
+        });
+    </script>
+</body>
+</html>
